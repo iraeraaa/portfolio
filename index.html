@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ira Jade Pinongcos | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+  body{
+    background: linear-gradient(135deg,#022c22 0%,#065f46 30%,#10b981 70%,#d1fae5 100%);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px;
+  }
+  nav{
+    width:100%;
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;
+  }
+  nav h2{color:white;}
+  nav ul{list-style:none; display:flex; gap:25px;}
+  nav ul li{color:white; cursor:pointer; transition:0.3s;}
+  nav ul li:hover{color:#bbf7d0;}
+
+  .page{display:none;}
+  .active{display:block;}
+
+  /* TOP GREEN SECTION */
+  .top-section{
+    width:100%;
+    max-width:1200px;
+    text-align:center;
+    margin-bottom:20px;
+  }
+  .top-section h1{color:white; font-size:48px; margin-bottom:20px;}
+  .top-section span{font-weight:300;}
+  .tags{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+  }
+  .tag{
+    background:white;
+    color:#065f46;
+    padding:8px 18px;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:500;
+    transition:0.3s;
+  }
+  .tag:hover{
+    transform:translateY(-5px);
+    background:#bbf7d0;
+    cursor:pointer;
+  }
+
+  /* WHITE PROFILE CARD - LOWER */
+  .card{
+    width:100%;
+    max-width:1200px;
+    background:rgba(255,255,255,0.95);
+    padding:80px 35px 35px 35px;
+    border-radius:25px;
+    box-shadow:0 25px 50px rgba(0,0,0,0.2);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:200px; /* lowered further */
+    margin-bottom:60px;
+  }
+  .card h3{color:#065f46; margin-bottom:20px;}
+  .profile-pic{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    position:absolute;
+    top:-90px;
+    border:6px solid white;
+    background:white;
+  }
+  .info{margin-bottom:12px; font-size:15px;}
+  .info span{font-weight:600; color:#065f46;}
+  .about{
+    margin-top:30px;
+    background:#d1fae5;
+    padding:20px;
+    border-radius:15px;
+    font-size:14px;
+    text-align:center;
+    width:90%;
+  }
+
+  /* ACTIVITIES PAGE - EXACTLY LIKE YOUR ORIGINAL */
+  .section{
+    background:rgba(255,255,255,0.95);
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    margin-bottom:35px;
+  }
+  .section h2{
+    color:#065f46;
+    margin-bottom:20px;
+  }
+  .item{
+    background:#ecfdf5;
+    padding:15px 20px;
+    border-radius:20px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:0.3s;
+  }
+  .item:hover{
+    transform:translateY(-5px);
+  }
+  .score{
+    background:#10b981;
+    color:white;
+    padding:6px 15px;
+    border-radius:20px;
+    font-weight:600;
+  }
+
+  footer{
+    text-align:center;
+    color:white;
+    margin-top:40px;
+    margin-bottom:20px;
+  }
+
+  @media(max-width:768px){
+    .top-section h1{font-size:36px;}
+    .card{padding:60px 25px 25px 25px; margin-top:150px;}
+    .profile-pic{width:140px; height:140px; top:-70px;}
+    .about{width:95%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <h2>Portfolio</h2>
+  <ul>
+    <li onclick="showPage('home')">Home</li>
+    <li onclick="showPage('activities')">Activities</li>
+  </ul>
+</nav>
+
+<!-- ================= HOME PAGE ================= -->
+<div id="home" class="page active">
+  <div class="top-section">
+    <h1>student <span>portfolio</span></h1>
+    <div class="tags">
+      <div class="tag">Problem Solving</div>
+      <div class="tag">Communication</div>
+      <div class="tag">Passionate</div>
+    </div>
+  </div>
+
+  <div class="card">
+    
+    <img src="image/sana.jpg" class="profile-pic" alt="Profile picture of Ira Jade G. Pinongcos">
+    <h1> ._. </h1>
+    <div class="info"><span>Name:</span> Ira Jade G. Pinongcos</div>
+    <div class="info"><span>Student No:</span> 251100528</div>
+    <div class="info"><span>Course & Section:</span> BSCS-1D</div>
+    <div class="about">
+      I am a Computer Science student who is just starting my journey in the world of technology. 
+      Although I may not have much experience yet, I is curious, motivated, and always willing to learn new 
+      things that will help me grow as a future developer.
+    </div>
+  </div>
+</div>
+
+<!-- ================= ACTIVITIES PAGE ================= -->
+<div id="activities" class="page">
+  <div class="section">
+    <h2>Quizzes</h2>
+    <div class="item">
+      <strong>Quiz 1</strong>
+      <div class="score">--</div>
+    </div>
+    <div class="item">
+      <strong>Quiz 2</strong>
+      <div class="score">--</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Activities</h2>
+    <div class="item">
+      <strong>Activity 1</strong>
+      <div class="score">Wala pa pu</div>
+    </div>
+    <div class="item">
+      <strong>Activity 2</strong>
+      <div class="score">Wala pa pu</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Midterm Exam</h2>
+    <div class="item">
+      <strong>Midterm Exam</strong>
+      <div class="score">--</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Final Exam</h2>
+    <div class="item">
+      <strong>Final Exam</strong>
+      <div class="score">--</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Ira Pinongcos | Student Portfolio
+</footer>
+
+<script>
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(page=>{
+    page.classList.remove('active');
+  });
+  document.getElementById(pageId)?.classList.add('active');
+}
+</script>
+
+</body>
+</html>
