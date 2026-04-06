@@ -9,6 +9,7 @@
 
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+
 body{
   background: linear-gradient(135deg,#022c22 0%,#065f46 30%,#10b981 70%,#d1fae5 100%);
   min-height:100vh;
@@ -24,8 +25,13 @@ nav{
 }
 nav h2{color:white;}
 nav ul{list-style:none; display:flex; gap:25px;}
-nav ul li a{color:white; text-decoration:none;}
+nav ul li{color:white; cursor:pointer;}
 
+/* PAGES */
+.page{display:none;}
+.active{display:block;}
+
+/* HOME */
 .top-section{
   width:100%;
   max-width:1200px;
@@ -85,6 +91,70 @@ nav ul li a{color:white; text-decoration:none;}
   width:90%;
 }
 
+/* ACTIVITIES */
+.section{
+  background:rgba(255,255,255,0.95);
+  padding:35px;
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+  margin-bottom:35px;
+  width:100%;
+  max-width:1200px;
+}
+
+.section h2{
+  color:#065f46;
+  margin-bottom:20px;
+}
+
+.item{
+  background:#ecfdf5;
+  padding:15px 20px;
+  border-radius:20px;
+  margin-bottom:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.score{
+  background:#10b981;
+  color:white;
+  padding:6px 15px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* VIEWER */
+.viewer{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:1000;
+}
+
+.viewer img{
+  max-width:90%;
+  max-height:80%;
+  border-radius:10px;
+}
+
+.close{
+  color:white;
+  font-size:30px;
+  position:absolute;
+  top:20px;
+  right:30px;
+  cursor:pointer;
+}
+
 footer{
   text-align:center;
   color:white;
@@ -95,38 +165,101 @@ footer{
 
 <body>
 
+<!-- NAV -->
 <nav>
   <h2>Portfolio</h2>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="activities.html">Activities</a></li>
+    <li onclick="showPage('home')">Home</li>
+    <li onclick="showPage('activities')">Activities</li>
   </ul>
 </nav>
 
-<div class="top-section">
-  <h1>student <span>portfolio</span></h1>
-  <div class="tags">
-    <div class="tag">Problem Solving</div>
-    <div class="tag">Communication</div>
-    <div class="tag">Passionate</div>
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+
+  <div class="top-section">
+    <h1>student <span>portfolio</span></h1>
+    <div class="tags">
+      <div class="tag">Problem Solving</div>
+      <div class="tag">Communication</div>
+      <div class="tag">Passionate</div>
+    </div>
   </div>
+
+  <div class="card">
+    <img src="image/IMG_7487[1].jpg" class="profile-pic">
+    <h1> ._. </h1>
+    <div class="info"><span>Name:</span> Ira Jade G. Pinongcos</div>
+    <div class="info"><span>Student No:</span> 251100528</div>
+    <div class="info"><span>Course & Section:</span> BSCS-1D</div>
+
+    <div class="about">
+      I am a Computer Science student who is just starting my journey in the world of technology. Although I may not have much experience yet, I am curious, motivated, and always willing to learn new things that will help me grow as a future developer.
+    </div>
+  </div>
+
 </div>
 
-<div class="card">
-  <img src="image/IMG_7487[1].jpg" class="profile-pic">
-  <h1> ._. </h1>
-  <div class="info"><span>Name:</span> Ira Jade G. Pinongcos</div>
-  <div class="info"><span>Student No:</span> 251100528</div>
-  <div class="info"><span>Course & Section:</span> BSCS-1D</div>
+<!-- ACTIVITIES PAGE -->
+<div id="activities" class="page">
 
-  <div class="about">
-    I am a Computer Science student who is just starting my journey in the world of technology. Although I may not have much experience yet, I am curious, motivated, and always willing to learn new things that will help me grow as a future developer.
+  <div class="section">
+    <h2>Quizzes</h2>
+
+    <div class="item">
+      <strong>Quiz 1</strong>
+      <div class="score" onclick="openViewer('image/PFGV5986[1].JPG')">View</div>
+    </div>
+
+    <div class="item">
+      <strong>Quiz 2</strong>
+      <div class="score" onclick="openViewer('image/GZVT0354[1].JPG')">View</div>
+    </div>
+
+    <div class="item">
+      <strong>Quiz 3</strong>
+      <div class="score" onclick="openViewer('image/OONQ7304[1].JPG')">View</div>
+    </div>
+
   </div>
+
+  <div class="section">
+    <h2>Activities</h2>
+
+    <div class="item">
+      <strong>Activity 1</strong>
+      <div class="score" onclick="openViewer('image/DUKQ2474[1].JPG')">View</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- IMAGE VIEWER -->
+<div id="viewer" class="viewer">
+  <span class="close" onclick="closeViewer()">&times;</span>
+  <img id="viewerImg" src="">
 </div>
 
 <footer>
   © 2026 Ira Pinongcos
 </footer>
+
+<script>
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+}
+
+function openViewer(imageSrc){
+  document.getElementById("viewer").style.display = "flex";
+  document.getElementById("viewerImg").src = imageSrc;
+}
+
+function closeViewer(){
+  document.getElementById("viewer").style.display = "none";
+}
+</script>
 
 </body>
 </html>
