@@ -14,9 +14,9 @@ body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padd
 .page{display:none;width:100%;max-width:1200px;position:relative;}
 .active{display:block;}
 .page::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;filter:blur(6px);opacity:0.4;z-index:-1;}
-#home::before{background-image:url('image/☘️✨.jpg');}
-#dashboard::before{background-image:url('image/Banner _ layout.jpg');}
-#uploadMenu::before,#quizPage::before,#labPage::before,#examPage::before{background-image:url('image/download.jpg');}
+#home::before{background-image:url('https://raw.githubusercontent.com/yourusername/yourrepo/main/☘️✨.jpg');}
+#dashboard::before{background-image:url('https://raw.githubusercontent.com/yourusername/yourrepo/main/Banner%20_layout.jpg');}
+#uploadMenu::before,#quizPage::before,#labPage::before,#examPage::before{background-image:url('https://raw.githubusercontent.com/yourusername/yourrepo/main/download.jpg');}
 nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;margin-bottom:20px;}
 nav h2{font-size:28px;}
 nav div span{margin-left:20px;cursor:pointer;transition:0.2s;}
@@ -25,9 +25,10 @@ nav div span:hover{color:#10b981;}
 .section:hover,.card:hover{transform:translateY(-8px);}
 .profile-pic{width:150px;height:150px;object-fit:cover;border-radius:50%;margin-bottom:15px;border:5px solid white;}
 #imageContainer{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
-#imageContainer .img-wrapper{position:relative;display:inline-block;}
-#imageContainer img{width:150px;height:150px;object-fit:cover;border-radius:10px;cursor:pointer;}
+#imageContainer .img-wrapper{position:relative;display:inline-block;padding:5px;background:#f0f0f0;border-radius:12px;}
+#imageContainer img{width:150px;height:150px;object-fit:cover;border-radius:10px;cursor:pointer;display:block;margin-bottom:5px;}
 .delete-btn{position:absolute;top:5px;right:5px;background:red;color:white;border:none;border-radius:50%;width:25px;height:25px;cursor:pointer;font-weight:bold;}
+.score-input{width:60px;margin:2px;text-align:center;}
 form{display:flex;flex-direction:column;align-items:center;gap:10px;}
 input{padding:10px;border-radius:10px;width:80%;}
 button{background:#10b981;color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;}
@@ -51,7 +52,7 @@ footer a:hover{color:white;text-decoration:underline;}
 
 <div id="home" class="page active">
   <div class="card">
-    <img src="image/IMG_7487[1].jpg" class="profile-pic">
+    <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/IMG_7487[1].jpg" class="profile-pic">
     <h2>Ira Jade G. Pinongcos</h2>
     <div class="info"><strong>Student No:</strong> 251100528</div>
     <div class="info"><strong>Course & Section:</strong> BSCS-1D</div>
@@ -126,13 +127,8 @@ function showPage(id){
   if(id==="dashboard") loadDashboard();
 }
 
-function openViewer(src){
-  viewer.style.display="flex";
-  viewerImg.src=src;
-}
-function closeViewer(){
-  viewer.style.display="none";
-}
+function openViewer(src){ viewer.style.display="flex"; viewerImg.src=src; }
+function closeViewer(){ viewer.style.display="none"; }
 
 function save(form){
   let title=form.querySelector("input[type=text]").value;
@@ -140,9 +136,7 @@ function save(form){
   let reader=new FileReader();
   reader.onload=()=>{
     let data=JSON.parse(localStorage.getItem("data"))||[];
-    let score=prompt("Score")||0;
-    let total=prompt("Total")||100;
-    data.push({id:Date.now(),title,image:reader.result,score,total});
+    data.push({id:Date.now(),title,image:reader.result,score:0,total:100});
     localStorage.setItem("data",JSON.stringify(data));
     alert("Saved!");
     form.reset();
@@ -154,6 +148,15 @@ function save(form){
 function deleteImage(id){
   let data=JSON.parse(localStorage.getItem("data"))||[];
   data=data.filter(item=>item.id!==id);
+  localStorage.setItem("data",JSON.stringify(data));
+  loadDashboard();
+}
+
+function updateScore(id,newScore,newTotal){
+  let data=JSON.parse(localStorage.getItem("data"))||[];
+  data.forEach(item=>{
+    if(item.id===id){ item.score=parseFloat(newScore)||0; item.total=parseFloat(newTotal)||100; }
+  });
   localStorage.setItem("data",JSON.stringify(data));
   loadDashboard();
 }
@@ -170,19 +173,38 @@ function loadDashboard(){
     let percent=Math.round((item.score/item.total)*100);
     let wrapper=document.createElement("div");
     wrapper.classList.add("img-wrapper");
+
     let img=document.createElement("img");
     img.src=item.image;
     img.onclick=()=>openViewer(item.image);
+
     let btn=document.createElement("button");
     btn.classList.add("delete-btn");
     btn.innerText="×";
     btn.onclick=()=>deleteImage(item.id);
+
+    let scoreInput=document.createElement("input");
+    scoreInput.type="number"; scoreInput.value=item.score;
+    scoreInput.classList.add("score-input");
+    scoreInput.onchange=()=>updateScore(item.id,scoreInput.value,totalInput.value);
+
+    let totalInput=document.createElement("input");
+    totalInput.type="number"; totalInput.value=item.total;
+    totalInput.classList.add("score-input");
+    totalInput.onchange=()=>updateScore(item.id,scoreInput.value,totalInput.value);
+
     wrapper.appendChild(img);
     wrapper.appendChild(btn);
+    wrapper.appendChild(document.createElement("br"));
+    wrapper.appendChild(scoreInput);
+    wrapper.appendChild(totalInput);
+
     imageContainer.appendChild(wrapper);
+
     labels.push(item.title);
     scores.push(percent);
   });
+
   if(chart) chart.destroy();
   chart=new Chart(document.getElementById("chart"),{
     type:"line",
