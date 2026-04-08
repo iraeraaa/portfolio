@@ -4,213 +4,264 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:linear-gradient(135deg,#022c22 0%,#065f46 30%,#10b981 70%,#d1fae5 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px;}
-nav{width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
-nav h2{color:white;}
-nav ul{list-style:none;display:flex;gap:25px;}
-nav ul li{color:white;cursor:pointer;}
-.page{display:none;}
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 20px;
+  background:#022c22;
+  color:white;
+}
+
+
+.page{display:none;width:100%;max-width:1200px;position:relative;}
 .active{display:block;}
-.top-section{width:100%;max-width:1200px;text-align:center;margin-bottom:20px;}
-.top-section h1{color:white;font-size:48px;margin-bottom:20px;}
-.top-section span{font-weight:300;}
-.tags{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;}
-.tag{background:white;color:#065f46;padding:8px 18px;border-radius:25px;font-size:14px;}
-.card{width:100%;max-width:1200px;background:rgba(255,255,255,0.95);padding:80px 35px 35px 35px;border-radius:25px;box-shadow:0 25px 50px rgba(0,0,0,0.2);position:relative;display:flex;flex-direction:column;align-items:center;margin-top:200px;}
-.profile-pic{width:180px;height:180px;border-radius:50%;object-fit:cover;position:absolute;top:-90px;border:6px solid white;}
-.info{margin-bottom:12px;}
-.info span{font-weight:600;color:#065f46;}
-.about{margin-top:30px;background:#d1fae5;padding:20px;border-radius:15px;text-align:center;width:90%;}
-.section{background:rgba(255,255,255,0.95);padding:35px;border-radius:25px;box-shadow:0 20px 40px rgba(0,0,0,0.2);margin-bottom:35px;width:100%;max-width:1200px;}
-.section h2{color:#065f46;margin-bottom:20px;}
-.item{background:#ecfdf5;padding:15px 20px;border-radius:20px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;}
-.score{background:#10b981;color:white;padding:6px 15px;border-radius:20px;cursor:pointer;}
-.viewer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;flex-direction:column;z-index:1000;}
-.viewer img{max-width:90%;max-height:80%;border-radius:10px;}
-.close{color:white;font-size:30px;position:absolute;top:20px;right:30px;cursor:pointer;}
-#imageContainer div{display:flex;flex-direction:column;align-items:center;}
-#imageContainer img{width:150px;border-radius:10px;}
-#imageContainer button{margin-top:5px;background:red;padding:5px 10px;border:none;color:white;border-radius:8px;cursor:pointer;}
-footer{text-align:center;color:white;margin-top:40px;}
-canvas{background:white;border-radius:20px;padding:20px;}
-button{background:#10b981;color:white;padding:10px;border:none;border-radius:10px;cursor:pointer;}
-input{padding:10px;border-radius:10px;border:1px solid #ccc;}
-form{display:flex;flex-direction:column;gap:10px;}
+.page::before{
+  content:"";
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background-size:cover;background-position:center;
+  filter:blur(6px);opacity:0.4;z-index:-1;
+}
+#home::before{background-image:url('image/☘️✨.jpg');}
+#dashboard::before{background-image:url('image/'Banner _ layout.jpg);}
+#uploadMenu::before,#quizPage::before,#labPage::before,#examPage::before{background-image:url('image/download.jpg');}
+
+
+nav{
+  width:100%;max-width:1200px;
+  display:flex;justify-content:space-between;margin-bottom:20px;
+}
+nav h2{font-size:28px;}
+nav div span{
+  margin-left:20px;
+  cursor:pointer;
+  transition:0.2s;
+}
+nav div span:hover{color:#10b981;}
+
+
+.section,.card{
+  max-width:900px;margin:20px auto;
+  background:rgba(255,255,255,0.9);
+  color:#065f46;padding:30px;
+  border-radius:25px;text-align:center;transition:.3s;
+}
+.section:hover,.card:hover{transform:translateY(-8px);}
+
+
+.profile-pic{
+  width:150px;height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-bottom:15px;
+  border:5px solid white;
+}
+
+#imageContainer{
+  display:flex;flex-wrap:wrap;gap:15px;justify-content:center;
+}
+#imageContainer img{
+  width:150px;height:150px;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* FORM */
+form{display:flex;flex-direction:column;align-items:center;gap:10px;}
+input{padding:10px;border-radius:10px;width:80%;}
+
+/* BUTTONS */
+button{
+  background:#10b981;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* VIEWER */
+.viewer{
+  display:none;
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:black;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:1000;
+}
+.viewer img{max-width:90%;max-height:80%;}
+.close{position:absolute;top:20px;right:30px;color:white;font-size:30px;cursor:pointer;}
+
+/* FOOTER */
+footer{
+  color:white;margin-top:20px;text-align:center;font-size:14px;
+}
+footer a{
+  margin:0 10px;color:#10b981;text-decoration:none;font-weight:600;transition:0.2s;
+}
+footer a:hover{color:white;text-decoration:underline;}
 </style>
 </head>
+
 <body>
 
 <nav>
   <h2>Portfolio</h2>
-  <ul>
-    <li onclick="showPage('home')">Home</li>
-    <li onclick="showPage('dashboard')">Dashboard</li>
-    <li onclick="showPage('uploadMenu')">Upload</li>
-  </ul>
+  <div>
+    <span onclick="showPage('home')">Home</span>
+    <span onclick="showPage('dashboard')">Dashboard</span>
+    <span onclick="showPage('uploadMenu')">Upload</span>
+  </div>
 </nav>
 
+<!-- HOME PAGE -->
 <div id="home" class="page active">
-  <div class="top-section">
-    <h1>student <span>portfolio</span></h1>
-    <div class="tags">
-      <div class="tag">Problem Solving</div>
-      <div class="tag">Communication</div>
-      <div class="tag">Teamwork</div>
-      <div class="tag">HTML</div>
-      <div class="tag">CSS</div>
-      <div class="tag">Java</div>
-    </div>
-  </div>
   <div class="card">
     <img src="image/IMG_7487[1].jpg" class="profile-pic">
-    <h1> ._. </h1>
-    <div class="info"><span>Name:</span> Ira Jade G. Pinongcos</div>
-    <div class="info"><span>Student No:</span> 251100528</div>
-    <div class="info"><span>Course & Section:</span> BSCS-1D</div>
+    <h2>Ira Jade G. Pinongcos</h2>
+    <div class="info"><strong>Student No:</strong> 251100528</div>
+    <div class="info"><strong>Course & Section:</strong> BSCS-1D</div>
     <div class="about">
-      I am a Computer Science student who is just starting my journey in the world of technology. Although I may not have much experience yet, I am curious, motivated, and always willing to learn new things that will help me grow as a future developer.
+      I am a Computer Science student who is just starting my journey in the world of technology.
+      Although I may not have much experience yet, I am curious, motivated, and always willing to
+      learn new things that will help me grow as a future developer.
     </div>
   </div>
 </div>
 
+<!-- DASHBOARD PAGE -->
 <div id="dashboard" class="page">
   <div class="section">
-    <h2>Dashboard</h2>
-    <canvas id="lineChart" width="800" height="400"></canvas>
+    <canvas id="chart"></canvas>
   </div>
   <div class="section">
-    <h2>Uploaded Proof</h2>
-    <div id="imageContainer" style="display:flex;flex-wrap:wrap;gap:15px;"></div>
+    <div id="imageContainer"></div>
   </div>
 </div>
 
+<!-- UPLOAD MENU PAGE -->
 <div id="uploadMenu" class="page">
   <div class="section">
-    <h2>Upload</h2>
-    <button onclick="showPage('quizPage')">Quiz Upload</button><br><br>
-    <button onclick="showPage('labPage')">Lab Work Upload</button><br><br>
-    <button onclick="showPage('examPage')">Major Exam Upload</button>
+    <button onclick="showPage('quizPage')">Quiz</button><br><br>
+    <button onclick="showPage('labPage')">Lab</button><br><br>
+    <button onclick="showPage('examPage')">Exam</button>
   </div>
 </div>
 
+<!-- UPLOAD FORMS -->
 <div id="quizPage" class="page">
   <div class="section">
-    <h2>Quiz Upload</h2>
     <form id="quizForm">
-      <input type="text" placeholder="Quiz Title" required>
-      <input type="file" required>
+      <input type="text" placeholder="Title" required>
       <input type="file" accept="image/*" required>
-      <button type="submit">Submit</button>
+      <button>Upload</button>
     </form>
   </div>
 </div>
 
 <div id="labPage" class="page">
   <div class="section">
-    <h2>Lab Work Upload</h2>
     <form id="labForm">
-      <input type="text" placeholder="Title / Description" required>
-      <input type="file" required>
+      <input type="text" placeholder="Title" required>
       <input type="file" accept="image/*" required>
-      <button type="submit">Submit</button>
+      <button>Upload</button>
     </form>
   </div>
 </div>
 
 <div id="examPage" class="page">
   <div class="section">
-    <h2>Major Exam Upload</h2>
     <form id="examForm">
-      <input type="text" placeholder="Exam Title" required>
-      <input type="file" required>
-      <button type="submit">Submit</button>
+      <input type="text" placeholder="Title" required>
+      <input type="file" accept="image/*" required>
+      <button>Upload</button>
     </form>
   </div>
 </div>
 
+<!-- IMAGE VIEWER -->
 <div id="viewer" class="viewer">
   <span class="close" onclick="closeViewer()">&times;</span>
-  <img id="viewerImg" src="">
+  <img id="viewerImg">
 </div>
 
-<footer>© 2026 Ira Pinongcos</footer>
+<!-- FOOTER -->
+<footer>
+  © 2026 Ira Pinongcos | 
+  <a href="https://instagram.com/eyeeeraa/" target="_blank">Instagram</a> | 
+  <a href="https://facebook.com/134340xoxo" target="_blank">Facebook</a>
+</footer>
 
 <script>
-let lineChart;
+let chart;
 
-function showPage(pageId){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  if(pageId==='dashboard') updateDashboard();
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  if(id==="dashboard") loadDashboard();
 }
 
 function openViewer(src){
-  document.getElementById("viewer").style.display="flex";
-  document.getElementById("viewerImg").src=src;
+  viewer.style.display="flex";
+  viewerImg.src=src;
 }
 function closeViewer(){
-  document.getElementById("viewer").style.display="none";
+  viewer.style.display="none";
 }
 
-function saveRecord(type, form){
+function save(form){
   let title=form.querySelector("input[type=text]").value;
-  let imageFile=form.querySelectorAll("input[type=file]")[1]?.files[0];
+  let file=form.querySelector("input[type=file]").files[0];
   let reader=new FileReader();
-  reader.onload=function(){
-    let imageData=reader.result;
-    let score=prompt("Enter score:");
-    let total=prompt("Enter total:");
-    let data=JSON.parse(localStorage.getItem("records"))||[];
-    data.push({type,title,score:Number(score),total:Number(total),image:imageData});
-    localStorage.setItem("records",JSON.stringify(data));
-    alert(type+" saved!");
+  reader.onload=()=>{
+    let data=JSON.parse(localStorage.getItem("data"))||[];
+    data.push({
+      id:Date.now(),
+      title,
+      image:reader.result,
+      score:prompt("Score")||0,
+      total:prompt("Total")||100
+    });
+    localStorage.setItem("data",JSON.stringify(data));
+    alert("Saved!");
     form.reset();
   };
-  if(imageFile) reader.readAsDataURL(imageFile);
+  reader.readAsDataURL(file);
 }
 
-document.getElementById("quizForm").addEventListener("submit",function(e){e.preventDefault();saveRecord("Quiz",this);});
-document.getElementById("labForm").addEventListener("submit",function(e){e.preventDefault();saveRecord("Activity",this);});
-document.getElementById("examForm").addEventListener("submit",function(e){e.preventDefault();saveRecord("Exam",this);});
+quizForm.onsubmit=e=>{e.preventDefault();save(quizForm);}
+labForm.onsubmit=e=>{e.preventDefault();save(labForm);}
+examForm.onsubmit=e=>{e.preventDefault();save(examForm);}
 
-function updateDashboard(){
-  let data=JSON.parse(localStorage.getItem("records"))||[];
-  let container=document.getElementById("imageContainer");
-  container.innerHTML="";
+function loadDashboard(){
+  let data=JSON.parse(localStorage.getItem("data"))||[];
+  imageContainer.innerHTML="";
   let labels=[],scores=[];
-  data.forEach((item,index)=>{
-    if(item.image){
-      let box=document.createElement("div");
-      let img=document.createElement("img");
-      img.src=item.image;
-      let label=document.createElement("p");
-      label.innerText=item.title;
-      label.style.textAlign="center";
-      let btn=document.createElement("button");
-      btn.innerText="Delete";
-      btn.onclick=()=>{deleteItem(index);}
-      box.appendChild(img);
-      box.appendChild(label);
-      box.appendChild(btn);
-      container.appendChild(box);
-    }
+  data.forEach(item=>{
+    let percent=Math.round((item.score/item.total)*100);
+    let img=document.createElement("img");
+    img.src=item.image;
+    img.onclick=()=>openViewer(item.image);
+    imageContainer.appendChild(img);
     labels.push(item.title);
-    scores.push(item.total?Math.round((item.score/item.total)*100):0);
+    scores.push(percent);
   });
-  if(lineChart) lineChart.destroy();
-  let ctx=document.getElementById("lineChart").getContext("2d");
-  lineChart=new Chart(ctx,{type:"line",data:{labels,scores,datasets:[{label:"Scores %",data:scores,fill:false,borderColor:"#10b981",tension:0.2}]},options:{scales:{y:{beginAtZero:true,max:100}}}});
-}
-
-function deleteItem(index){
-  let data=JSON.parse(localStorage.getItem("records"))||[];
-  data.splice(index,1);
-  localStorage.setItem("records",JSON.stringify(data));
-  updateDashboard();
+  if(chart) chart.destroy();
+  chart=new Chart(document.getElementById("chart"),{
+    type:"line",
+    data:{labels,datasets:[{label:"Scores %",data:scores,borderColor:"#10b981"}]},
+    options:{scales:{y:{max:100,min:0}}}
+  });
 }
 </script>
 
