@@ -4,10 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
 body{
   min-height:100vh;
   display:flex;
@@ -17,72 +20,126 @@ body{
   background:#022c22;
   color:white;
 }
+
 .page{display:none;width:100%;max-width:1200px;position:relative;}
 .active{display:block;}
+
 .page::before{
   content:"";
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background-size:cover;background-position:center;
-  filter:blur(6px);opacity:0.4;z-index:-1;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background-size:cover;
+  background-position:center;
+  filter:blur(6px);
+  opacity:0.4;
+  z-index:-1;
 }
+
 #home::before{background-image:url('image/☘️✨.jpg');}
 #dashboard::before{background-image:url('image/Banner _ layout.jpg');}
 #uploadMenu::before,#quizPage::before,#labPage::before,#examPage::before{background-image:url('image/download.jpg');}
+
 nav{
-  width:100%;max-width:1200px;
-  display:flex;justify-content:space-between;margin-bottom:20px;
+  width:100%;
+  max-width:1200px;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
 }
+
 nav h2{font-size:28px;}
+
 nav div span{
   margin-left:20px;
   cursor:pointer;
   transition:0.2s;
 }
+
 nav div span:hover{color:#10b981;}
+
 .section,.card{
-  max-width:900px;margin:20px auto;
+  max-width:900px;
+  margin:20px auto;
   background:rgba(255,255,255,0.9);
-  color:#065f46;padding:30px;
-  border-radius:25px;text-align:center;transition:.3s;
+  color:#065f46;
+  padding:30px;
+  border-radius:25px;
+  text-align:center;
+  transition:.3s;
 }
+
 .section:hover,.card:hover{transform:translateY(-8px);}
+
 .profile-pic{
-  width:150px;height:150px;
+  width:150px;
+  height:150px;
   object-fit:cover;
   border-radius:50%;
   margin-bottom:15px;
   border:5px solid white;
 }
+
 #imageContainer{
-  display:flex;flex-wrap:wrap;gap:15px;justify-content:center;
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:center;
 }
+
 #imageContainer img{
-  width:150px;height:150px;
+  width:150px;
+  height:150px;
   object-fit:cover;
   border-radius:10px;
   cursor:pointer;
 }
+
 .viewer{
   display:none;
   position:fixed;
-  top:0;left:0;width:100%;height:100%;
+  top:0;left:0;
+  width:100%;height:100%;
   background:black;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   z-index:1000;
 }
+
 .viewer img{max-width:90%;max-height:80%;}
-.close{position:absolute;top:20px;right:30px;color:white;font-size:30px;cursor:pointer;}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+}
+
 footer{
-  color:white;margin-top:20px;text-align:center;font-size:14px;
+  color:white;
+  margin-top:20px;
+  text-align:center;
+  font-size:14px;
 }
+
 footer a{
-  margin:0 10px;color:#10b981;text-decoration:none;font-weight:600;transition:0.2s;
+  margin:0 10px;
+  color:#10b981;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.2s;
 }
-footer a:hover{color:white;text-decoration:underline;}
+
+footer a:hover{
+  color:white;
+  text-decoration:underline;
+}
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -98,9 +155,9 @@ footer a:hover{color:white;text-decoration:underline;}
   <div class="card">
     <img src="image/IMG_7487[1].jpg" class="profile-pic">
     <h2>Ira Jade G. Pinongcos</h2>
-    <div class="info"><strong>Student No:</strong> 251100528</div>
-    <div class="info"><strong>Course & Section:</strong> BSCS-1D</div>
-    <div class="about">
+    <div><strong>Student No:</strong> 251100528</div>
+    <div><strong>Course & Section:</strong> BSCS-1D</div>
+    <div style="margin-top:15px;">
       I am a Computer Science student who is just starting my journey in the world of technology.
       Although I may not have much experience yet, I am curious, motivated, and always willing to
       learn new things that will help me grow as a future developer.
@@ -109,10 +166,39 @@ footer a:hover{color:white;text-decoration:underline;}
 </div>
 
 <div id="dashboard" class="page">
+
   <div class="section">
     <canvas id="chart"></canvas>
   </div>
+
   <div class="section" id="imageContainer"></div>
+
+  <div class="section">
+    <h3>My Projects</h3>
+
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:15px;">
+
+      <a href="https://iraeraaa.github.io/Carousel/" target="_blank" style="text-decoration:none;width:220px;">
+        <div style="background:#10b981;color:white;padding:20px;border-radius:20px;box-shadow:0 10px 20px rgba(0,0,0,0.2);transition:0.3s;"
+        onmouseover="this.style.transform='scale(1.05)'"
+        onmouseout="this.style.transform='scale(1)'">
+          <h3>Carousel</h3>
+          <p style="font-size:13px;margin-top:8px;">Image slider project</p>
+        </div>
+      </a>
+
+      <a href="https://iraeraaa.github.io/Calculator/" target="_blank" style="text-decoration:none;width:220px;">
+        <div style="background:#065f46;color:white;padding:20px;border-radius:20px;box-shadow:0 10px 20px rgba(0,0,0,0.2);transition:0.3s;"
+        onmouseover="this.style.transform='scale(1.05)'"
+        onmouseout="this.style.transform='scale(1)'">
+          <h3>Calculator</h3>
+          <p style="font-size:13px;margin-top:8px;">Basic calculator app</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
 </div>
 
 <div id="uploadMenu" class="page">
@@ -125,25 +211,27 @@ footer a:hover{color:white;text-decoration:underline;}
 
 <div id="quizPage" class="page">
   <div class="section">
-    <form id="quizForm">
+    <form>
       <input type="text" placeholder="Title" required>
       <input type="file" accept="image/*" required>
       <button>Upload</button>
     </form>
   </div>
 </div>
+
 <div id="labPage" class="page">
   <div class="section">
-    <form id="labForm">
+    <form>
       <input type="text" placeholder="Title" required>
       <input type="file" accept="image/*" required>
       <button>Upload</button>
     </form>
   </div>
 </div>
+
 <div id="examPage" class="page">
   <div class="section">
-    <form id="examForm">
+    <form>
       <input type="text" placeholder="Title" required>
       <input type="file" accept="image/*" required>
       <button>Upload</button>
@@ -157,8 +245,8 @@ footer a:hover{color:white;text-decoration:underline;}
 </div>
 
 <footer>
-  © 2026 Ira Pinongcos | 
-  <a href="https://instagram.com/eyeeeraa/" target="_blank">Instagram</a> | 
+  © 2026 Ira Pinongcos |
+  <a href="https://instagram.com/eyeeeraa/" target="_blank">Instagram</a> |
   <a href="https://facebook.com/134340xoxo" target="_blank">Facebook</a>
 </footer>
 
@@ -179,14 +267,20 @@ function showPage(id){
 }
 
 function openViewer(src){
-  viewer.style.display="flex";
-  viewerImg.src=src;
+  document.getElementById("viewer").style.display="flex";
+  document.getElementById("viewerImg").src=src;
 }
-function closeViewer(){viewer.style.display="none";}
+
+function closeViewer(){
+  document.getElementById("viewer").style.display="none";
+}
 
 function loadDashboard(){
+  const imageContainer=document.getElementById("imageContainer");
   imageContainer.innerHTML="";
+
   let labels=[], scores=[];
+
   images.forEach(item=>{
     let img=document.createElement("img");
     img.src=item.src;
@@ -195,11 +289,22 @@ function loadDashboard(){
     labels.push(item.title);
     scores.push(item.score);
   });
+
   if(chart) chart.destroy();
+
   chart=new Chart(document.getElementById("chart"),{
     type:"line",
-    data:{labels,datasets:[{label:"Scores %",data:scores,borderColor:"#10b981"}]},
-    options:{scales:{y:{max:100,min:0}}}
+    data:{
+      labels:labels,
+      datasets:[{
+        label:"Scores %",
+        data:scores,
+        borderColor:"#10b981"
+      }]
+    },
+    options:{
+      scales:{y:{max:100,min:0}}
+    }
   });
 }
 </script>
